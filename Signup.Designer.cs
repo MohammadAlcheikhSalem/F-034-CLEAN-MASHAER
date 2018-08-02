@@ -50,6 +50,7 @@
             this.CancelBtn.TabIndex = 24;
             this.CancelBtn.Text = "Cancel";
             this.CancelBtn.UseVisualStyleBackColor = true;
+            this.CancelBtn.Click += new System.EventHandler(this.CancelBtn_Click);
             // 
             // SignupBtn
             // 
@@ -165,6 +166,7 @@
             this.Controls.Add(this.RepasswordLbl);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Signup";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Signup";
             this.ResumeLayout(false);
             this.PerformLayout();

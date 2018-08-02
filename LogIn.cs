@@ -14,7 +14,9 @@ namespace GarbageDetector
     {
         private GarbageDetectorEntities dbx = new GarbageDetectorEntities();
         private User logUser;
-        
+        private bool CloseFactor = false;
+
+
         public LogIn()
         {
             InitializeComponent();
@@ -23,10 +25,10 @@ namespace GarbageDetector
         private void SignUpLbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             Signup sign = new Signup();
-            this.Close();
             sign.Show();
+            GlobalVariables.RunPage = this;
+            GlobalVariables.RunPage.Hide();
 
-           
         }
 
         private void SigninBtn_Click(object sender, EventArgs e)
@@ -40,17 +42,37 @@ namespace GarbageDetector
                 {
                     if (RUserChk.Checked) Properties.Settings.Default.UserName = UserBox.Text;
                     if (RPassChk.Checked) Properties.Settings.Default.Password = PassBox.Text;
+                    GlobalVariables.RunUser = logUser;
                     new ManualMonitor().Show();
-                    this.Hide();
+                    GlobalVariables.RunPage = this;
+                    GlobalVariables.RunPage.Hide();
                 }
             }
             catch { Exception ex = new Exception(); MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
-            }
-        private void GlobalVariables(object sender, FormClosingEventArgs e)
+        }
+
+        private void CloseBtn_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to close the form?", "Warning", MessageBoxButtons.YesNo) == System.Windows.Forms.DialogResult.No)
-                e.Cancel = true;
-            else this.Close();
+            this.Close();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+            if (e.CloseReason == CloseReason.WindowsShutDown) return;
+            if (CloseFactor == true) return;
+            // Confirm user wants to close
+            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+                default:
+                    this.Dispose();
+                    this.Close();
+                    break;
             }
         }
+
+    }
 }

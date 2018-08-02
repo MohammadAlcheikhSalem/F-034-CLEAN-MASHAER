@@ -93,6 +93,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GarbageDetectorDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GlobalVariables.cs" />
     <Compile Include="LogIn.cs">
       <SubType>Form</SubType>
     </Compile>

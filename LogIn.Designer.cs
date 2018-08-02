@@ -52,6 +52,7 @@
             this.CloseBtn.TabIndex = 23;
             this.CloseBtn.Text = "Cancel";
             this.CloseBtn.UseVisualStyleBackColor = true;
+            this.CloseBtn.Click += new System.EventHandler(this.CloseBtn_Click);
             // 
             // ContactLbl
             // 

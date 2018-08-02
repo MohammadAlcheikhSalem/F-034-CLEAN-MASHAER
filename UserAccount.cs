@@ -18,7 +18,6 @@ namespace GarbageDetector
 
         //----------Define Fileds----------------
 
-        private int _id;
         private string _name;
         private string _password;
 
@@ -51,10 +50,7 @@ namespace GarbageDetector
         }
 
         //----------Define Properties------------
-        public int ID
-        {
-            get { return _id; }
-        }
+
         public string NAME
         {
             set { _name = value; }
